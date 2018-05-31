@@ -26,9 +26,9 @@
 #include <stdio.h>		
 using namespace std;	
 
-void main()					 // Заголовок главной функции
+void main()					 
 {
-	setlocale(LC_ALL, "Rus");// Функция для работы с русским языком
+	setlocale(LC_ALL, "Rus");
 
 	ifstream INPUT("INPUT.TXT");
 	ofstream OUTPUT("OUTPUT.TXT");
