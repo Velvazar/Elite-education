@@ -204,6 +204,7 @@
 	
 С использованием структур данных(struct) реализовать на языке С++ программу для заполнения списка элементов и поиска элемента по заданному критерию.
 Для этого самостоятельно реализовать динамический список и операции по его обработке.
+
 	#include <iostream>
 	#include <conio.h>
 	#include <vector>
@@ -218,7 +219,7 @@
 	double Height;
 	double Years;
 
-	Property *next;										// Ссылка на следующий элемент списка
+	Property *next;									// Ссылка на следующий элемент списка
 	};
 
 	class Human
@@ -235,7 +236,7 @@
 	void OutputALL();
 	void Search(int, int);
 	};
-	void Human::Component_IN(double Weight, double Height, double Years)		// Создание нового элемента списка
+	void Human::Component_IN(double Weight, double Height, double Years)	// Создание нового элемента списка
 	{
 	Property *p = new Property;
 	p->Weight = Weight;
@@ -287,7 +288,7 @@
 	Property *temp = link;
 	switch (mode)
 	{
-		case 1:										// По весу
+		case 1:									// По весу
 		{
 			while (temp)
 			{
@@ -302,7 +303,7 @@
 
 			break;
 		}
-		case 2:										// По росту
+		case 2:									// По росту
 		{
 			while (temp)
 			{
@@ -317,7 +318,7 @@
 
 			break;	
 		}
-		case 3:										// По возрасту
+		case 3:									// По возрасту
 		{
 			while (temp)
 			{
@@ -358,7 +359,7 @@
 	{
 	setlocale(0, "rus");
 	Human *list;
-	list = new Human;								// Выделение памяти под динамический список
+	list = new Human;						// Выделение памяти под динамический список
 
 	double Weight;
 	double Height;
@@ -441,4 +442,4 @@
 	}
 	_getch();	
 	delete list;
-}
+	}
