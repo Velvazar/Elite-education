@@ -1,1 +1,99 @@
 # Elite-education
+
+Первая задача с ACMP
+
+//На доске написана последовательность n целых чисел. Играют двое. На очередном ходе игрок выбирает число с правого или с левого края последовательности.
+//Затем это число стирается и последовательность становится на одно число меньше, а ход переходит к противнику.Выигрывает тот, кто наберет в сумме больше.
+//Написать программу, определяющую победителя в конкретной игре, при условии, что игроки будут играть оптимально.
+//
+//Входные данные:
+//В первой строке входного файла INPUT.TXT записано целое число n(0 < n < 100).Во второй строке через пробел заданы n натуральных чисел, не превосходящих 1000.
+//
+//Выходные данные:
+//В единственную строку выходного файла OUTPUT.TXT нужно вывести 1, если победит первый игрок, 2 – если победит второй игрок и 0 – в случае ничьей.
+
+
+#include <iostream>
+#include <fstream>
+#include <conio.h>		
+#include <stdio.h>		
+using namespace std;	
+
+void main()					 // Заголовок главной функции
+{
+	setlocale(LC_ALL, "Rus");// Функция для работы с русским языком
+
+	ifstream INPUT("INPUT.TXT");
+	ofstream OUTPUT("OUTPUT.TXT");
+
+//	int n = rand() % 100;
+	int n;
+	INPUT >> n;
+	int *Array= new int[n];
+	
+	for (int i = 0; i < n; i++)
+	{
+//		Array[i] = rand() % 9 + 1;
+		INPUT >> Array[i];
+	}
+
+	int Player_1 = 0;
+	int Player_2 = 0;
+	int a = n - 1;
+	cout << "n = " << n << "\n";
+	cout << "Начальный ряд чисел:\n";
+	
+	for (int i = 0; i < a+1; i++) cout << Array[i] << " ";
+
+	for (int i = 0; i < n / 2; i++)
+	{
+		if (Array[0] < Array[a])
+		{	
+			Player_1 += Array[a];
+			cout << "\nНаибольшее крайнее число = " << Array[a];
+			a--;
+		}
+		else if (Array[0] >= Array[a])
+		{
+			Player_1 += Array[0];
+			cout << "\nНаибольшее крайнее число = " << Array[0];
+			for (int j = 0; j < a; j++)Array[j] = Array[j + 1];		
+			a--;
+		}
+
+		cout << "\nИгрок 1: " << Player_1 << "\n\n";
+		cout << "Получившийся ряд чисел:\n";
+		for (int i = 0; i < a + 1; i++) cout << Array[i] << " ";
+
+		if (Array[0] < Array[a])
+		{
+			Player_2 += Array[a];
+			cout << "\nНаибольшее крайнее число = " << Array[a];
+			a--;
+		}
+		else if (Array[0] >= Array[a])
+		{
+			Player_2 += Array[0];
+			cout << "\nНаибольшее крайнее число = " << Array[0];
+			for (int j = 0; j < a; j++) Array[j] = Array[j + 1];			
+			a--;
+		}
+		cout << "\nИгрок 2: " << Player_2 << "\n";
+		cout << "\nПолучившийся ряд чисел:\n";
+		for (int i = 0; i < a + 1; i++) cout << Array[i] << " ";
+	}
+
+	if (n % 2 != 0)
+	{
+		Player_1 += Array[a];
+		cout << "\nИгрок 1: " << Player_1 << "\n";
+	}
+
+	cout << "\nРезультат:\n";
+	if (Player_1 > Player_2) { OUTPUT << 1; cout << "Победа игрока 1"; }
+	else if (Player_2 > Player_1) {OUTPUT << 2; cout << "Победа игрока 2";}
+	else { OUTPUT << 0; cout << "Ничья"; }
+
+	cout << "\n";
+	system("pause");
+}
