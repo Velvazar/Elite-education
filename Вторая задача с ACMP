@@ -70,8 +70,8 @@
 				Length = 1;
 				n++;
 			}
-		}
-	}
+		}}
+	
 	Max_length[n] = Length;
 	Length = 1;
 	n++;
