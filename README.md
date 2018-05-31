@@ -20,14 +20,14 @@
 В единственную строку выходного файла OUTPUT.TXT нужно вывести 1, если победит первый игрок, 
 2– если победит второй игрок и 0 – в случае ничьей.
 
-#include <iostream>
-#include <fstream>
-#include <conio.h>		
-#include <stdio.h>		
-using namespace std;	
+	#include <iostream>
+	#include <fstream>
+	#include <conio.h>		
+	#include <stdio.h>		
+	using namespace std;	
 
-void main()					 
-{
+	void main()					 
+	{
 	setlocale(LC_ALL, "Rus");
 
 	ifstream INPUT("INPUT.TXT");
