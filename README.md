@@ -30,17 +30,12 @@ void main()					 // Заголовок главной функции
 	ifstream INPUT("INPUT.TXT");
 	ofstream OUTPUT("OUTPUT.TXT");
 
-//	int n = rand() % 100;
 	int n;
 	INPUT >> n;
 	int *Array= new int[n];
 	
-	for (int i = 0; i < n; i++)
-	{
-//		Array[i] = rand() % 9 + 1;
-		INPUT >> Array[i];
-	}
-
+	for (int i = 0; i < n; i++) INPUT >> Array[i];
+	
 	int Player_1 = 0;
 	int Player_2 = 0;
 	int a = n - 1;
