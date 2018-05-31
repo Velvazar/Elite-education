@@ -45,7 +45,7 @@ link = p;
 void Human::Component_OUT(int n)
 {
 Property *temp = link;
-for (int i = 0; i<n;i++) temp = temp->next;
+for (int i = 1; i<n;i++) temp = temp->next;
 
 cout << n << " человек:\n";
 cout << "Вес " << temp->Weight << "\n";
