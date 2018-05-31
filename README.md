@@ -106,33 +106,33 @@ void main()
 			
 	####################################################
 	
-	//Последовательность a1, a2, a3, …, an - 1, an называется пилообразной, если она удовлетворяет одному из следующих условий :
-//1)	a1 < a2 > a3 < … > an - 1 < an
-//2)	a1 > a2 < a3 > … < an - 1 > an
-//
-//Дана числовая последовательность.Требуется определить длину самой длинной ее пилообразной непрерывной подпоследовательности.
-//
-//Входные данные:
-//В первой строке входного файла INPUT.TXT записано натуральное число N – количество элементов последовательности.
-//Во второй строке файла через пробел записаны N элементов целочисленной последовательности{ ai }.Ограничения: N<106, | ai | < 32000.
-//
-//Выходные данные:
-//В единственную строку выходного файла OUTPUT.TXT нужно вывести одно целое число — длину самой длиной непрерывной пилообразной подпоследовательности.
+	
+Последовательность a1, a2, a3, …, an - 1, an называется пилообразной, если она удовлетворяет одному из следующих условий :
+1)	a1 < a2 > a3 < … > an - 1 < an
+2)	a1 > a2 < a3 > … < an - 1 > an
 
-#include <iostream>
-#include <fstream>
-#include <conio.h>		
-#include <stdio.h>		
-using namespace std;
+Дана числовая последовательность.Требуется определить длину самой длинной ее пилообразной непрерывной подпоследовательности.
 
-void main()					 // Заголовок главной функции
-{
-	setlocale(LC_ALL, "Rus");// Функция для работы с русским языком
+Входные данные:
+В первой строке входного файла INPUT.TXT записано натуральное число N – количество элементов последовательности.
+Во второй строке файла через пробел записаны N элементов целочисленной последовательности{ ai }.Ограничения: N<106, | ai | < 32000.
+
+Выходные данные:
+В единственную строку выходного файла OUTPUT.TXT нужно вывести одно целое число — длину самой длиной непрерывной пилообразной подпоследовательности.
+
+	#include <iostream>
+	#include <fstream>
+	#include <conio.h>		
+	#include <stdio.h>		
+	using namespace std;
+
+	void main()					
+	{
+	setlocale(LC_ALL, "Rus");
 
 	ifstream INPUT("INPUT.TXT");
 	ofstream OUTPUT("OUTPUT.TXT");
 
-//	int N = rand() % 1000;
 	int N;
 	INPUT >> N;
 	int *Сhain = new int[N+3];
@@ -143,7 +143,6 @@ void main()					 // Заголовок главной функции
 	
 	for (int i = 0; i < N; i++)
 	{
-//		Сhain[i] = rand()%3199+1;
 		INPUT >> Сhain[i];
 		cout << Сhain[i] << " ";
 	}
@@ -156,11 +155,11 @@ void main()					 // Заголовок главной функции
 	{
 		if (Сhain[i] < Сhain[i + 1])
 		{
-			if (Сhain[i + 1] > Сhain[i + 2])	// Вверх и вниз
+			if (Сhain[i + 1] > Сhain[i + 2])	
 			{
 				Length++;
 			}
-			else								// Вверх и вверх
+			else								
 			{
 				Max_length[n] = Length;
 				Length = 1;
@@ -170,11 +169,11 @@ void main()					 // Заголовок главной функции
 	
 		else
 		{
-			if (Сhain[i + 1] < Сhain[i + 2])	// Вниз и вверх
+			if (Сhain[i + 1] < Сhain[i + 2])	
 			{
 				Length++;
 			}
-			else								// Вниз и вниз
+			else								
 			{
 				Max_length[n] = Length;
 				Length = 1;
@@ -192,38 +191,39 @@ void main()					 // Заголовок главной функции
 	cout << "\nМаксимальная длинна пилообразного участка = " << M_length << "\n";
 	OUTPUT << M_length;
 	system("pause");
-}	
+	}	
+
 
 	####################################################
 
-		 Динамический односвязный список
+		  Динамический односвязный список
 			
 	####################################################
 	
-	//С использованием структур данных(struct) реализовать на языке С++ программу для заполнения списка элементов и поиска элемента по заданному критерию.
-//Для этого самостоятельно реализовать динамический список и операции по его обработке.
-#include <iostream>
-#include <conio.h>
-#include <vector>
-#include <string> 
+С использованием структур данных(struct) реализовать на языке С++ программу для заполнения списка элементов и поиска элемента по заданному критерию.
+Для этого самостоятельно реализовать динамический список и операции по его обработке.
+	#include <iostream>
+	#include <conio.h>
+	#include <vector>
+	#include <string> 
 
-using namespace std;
-void main();
-struct Property
-{
+	using namespace std;
+	void main();
+	struct Property
+	{
 	
 	double Weight;
 	double Height;
 	double Years;
 
 	Property *next;										// Ссылка на следующий элемент списка
-};
+	};
 
-class Human
-{	
+	class Human
+	{	
 	Property * link;
 
-public:
+	public:
 	int i;
 	Human(){ i = 0; } //:link(NULL) {}
 	~Human();
@@ -232,19 +232,19 @@ public:
 	void Component_OUT(int);
 	void OutputALL();
 	void Search(int, int);
-};
-void Human::Component_IN(double Weight, double Height, double Years)		// Создание нового элемента списка
-{
+	};
+	void Human::Component_IN(double Weight, double Height, double Years)		// Создание нового элемента списка
+	{
 	Property *p = new Property;
 	p->Weight = Weight;
 	p->Height = Height;
 	p->Years = Years;
 	p->next = link;
 	link = p;
-}
+	}
 
-void Human::Component_OUT(int n)
-{
+	void Human::Component_OUT(int n)
+	{
 	Property *temp = link;
 	for (int i = 0; i<n;i++) temp = temp->next;
 	
@@ -252,10 +252,10 @@ void Human::Component_OUT(int n)
 	cout << "Вес " << temp->Weight << "\n";
 	cout << "Рост " << temp->Height << "\n";
 	cout << "Возраст " << temp->Years << "\n\n";
-}
+	}
 
-void Human::OutputALL()
-{
+	void Human::OutputALL()
+	{
 	system("cls");
 	Property *temp = link;
 	while (temp)
@@ -270,11 +270,11 @@ void Human::OutputALL()
 	}
 	_getch();
 	main();
-}
+	}
 
 
-void Human::Search(int mode, int N)
-{	
+	void Human::Search(int mode, int N)
+	{	
 	int i = 0;
 	int a = 0;
 	double SearchingValue;	
@@ -339,10 +339,10 @@ void Human::Search(int mode, int N)
 	}
 	_getch();
 	main();
-}
+	}
 
-Human::~Human()
-{
+	Human::~Human()
+	{
 	Property* temp = link;
 	while (temp)
 	{
@@ -350,10 +350,10 @@ Human::~Human()
 		temp = temp->next;
 		delete del;
 	}
-}
+	}
 
-void main()
-{
+	void main()
+	{
 	setlocale(0, "rus");
 	Human *list;
 	list = new Human;								// Выделение памяти под динамический список
