@@ -8,11 +8,12 @@
 //Выходные данные:
 //В единственную строку выходного файла OUTPUT.TXT нужно вывести 1, если победит первый игрок, 2 – если победит второй игрок и 0 – в случае ничьей.
 
-
+#pragma warning(disable : 4996)
 #include <iostream>
 #include <fstream>
 #include <conio.h>		
 #include <stdio.h>
+#include <gtest\gtest.h>
 using namespace std;
 
 class Player
@@ -44,35 +45,41 @@ int Player::Game(int i, int n, int *Array)
 			cout << Array[a] << " ";
 		}
 
-	if (i == n / 2 && n % 2 != 0)
-	{
-		cout << "\na == n / 2\n";
-		Play += Array[i];
-		cout << "\nИгрок 1: " << Play << "\n";
-	}
 	return Play;
 }
 
+TEST(PlayerTest, StartedGameAccountEmpty)
+{
+	Player Player_A;
+	EXPECT_EQ(0, Player_A.Play);
+}
 
 void Result(int player_1, int player_2)
 {
 	int a;
 	a = 0;
 	ofstream OUTPUT("OUTPUT.TXT", ios_base::trunc);
-	if(player_1 > player_2)
-	OUTPUT << 1;
-	else if (player_1 < player_2) 
-	OUTPUT << 2;
-	else OUTPUT << 0;
+	if (player_1 > player_2)
+	{
+		OUTPUT << 1;
+		cout << "\nПобеда игрока 1\n";
+	}
+	else if (player_1 < player_2)
+	{
+		OUTPUT << 2;
+		cout << "\nПобеда игрока 2\n";
+	}
+	else
+	{
+		OUTPUT << 0;
+		cout << "\nНичья!\n";
+	}
 }
 
-void main ()														// Заголовок главной функции
+int main (int argc,char * argv[])														// Заголовок главной функции
 {
 	testing::InitGoogleTest(&argc, argv);
-	return RUN_ALL_TESTS();
-	setlocale(LC_ALL, "Rus");									// Функция для работы с русским языком
-
-	Res(5);
+	setlocale(LC_ALL, "Rus");															// Функция для работы с русским языком
 
 	int k, n;
 	int *Array=NULL;
@@ -108,16 +115,17 @@ void main ()														// Заголовок главной функции
 		cout << "Вы ввели неправильное значение\n";
 		system("pause");
 		system("cls");
-    main();
 	}
 
 	Array[n] = Array[n-1];
 	Array[n + 1] = Array[n];
 			 
 	Player A;
+	cout << "\n";
+	RUN_ALL_TESTS();
 	Player B;
 			 
-	for (int i=n; i > n / 2; i --)
+	for (int i=n; i > n /5; i --)
 	{				
 		A.Game(i, n, Array);
 		cout << "\nИгрок 1: " << A.Play << "\n";
@@ -126,8 +134,15 @@ void main ()														// Заголовок главной функции
 		cout << "\nИгрок 2: " << B.Play << "\n";
 		n--;
 	}
+	if (n % 2 != 0)
+	{
+		cout << "\nНаибольшее крайнее число = " << Array[n / 2] << "\n";
+		A.Play += Array[n / 2];
+		cout << "\nИгрок 1: " << A.Play << "\n";
+	}
 Result(A.Play, B.Play);
 
 	cout << "\n";
 	system("pause");
+	return 0;
 }
