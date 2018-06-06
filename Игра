@@ -1,0 +1,133 @@
+//На доске написана последовательность n целых чисел. Играют двое. На очередном ходе игрок выбирает число с правого или с левого края последовательности.
+//Затем это число стирается и последовательность становится на одно число меньше, а ход переходит к противнику. Выигрывает тот, кто наберет в сумме больше.
+//Написать программу, определяющую победителя в конкретной игре, при условии, что игроки будут играть оптимально.
+//
+//Входные данные:
+//В первой строке входного файла INPUT.TXT записано целое число n(0 < n < 100).Во второй строке через пробел заданы n натуральных чисел, не превосходящих 1000.
+//
+//Выходные данные:
+//В единственную строку выходного файла OUTPUT.TXT нужно вывести 1, если победит первый игрок, 2 – если победит второй игрок и 0 – в случае ничьей.
+
+
+#include <iostream>
+#include <fstream>
+#include <conio.h>		
+#include <stdio.h>
+using namespace std;
+
+class Player
+{
+public:
+	int Play;	
+	int Game(int, int, int*);
+	Player()
+	{
+		Play = 0;
+	}
+};
+int Player::Game(int i, int n, int *Array)
+{	
+		if (Array[0] < Array[i])
+		{
+			Play += Array[i];
+			cout << "\nНаибольшее крайнее число = " << Array[i] << "\n";
+		}
+
+		else 
+		{
+			Play += Array[0];
+			cout << "\nНаибольшее крайнее число = " << Array[0] << "\n";
+			for (int j = 0; j < i; j++)Array[j] = Array[j + 1];
+		}
+		for (int a = 0; a < i-1  ; a ++)
+		{
+			cout << Array[a] << " ";
+		}
+
+	if (i == n / 2 && n % 2 != 0)
+	{
+		cout << "\na == n / 2\n";
+		Play += Array[i];
+		cout << "\nИгрок 1: " << Play << "\n";
+	}
+	return Play;
+}
+
+
+void Result(int player_1, int player_2)
+{
+	int a;
+	a = 0;
+	ofstream OUTPUT("OUTPUT.TXT", ios_base::trunc);
+	if(player_1 > player_2)
+	OUTPUT << 1;
+	else if (player_1 < player_2) 
+	OUTPUT << 2;
+	else OUTPUT << 0;
+}
+
+void main ()														// Заголовок главной функции
+{
+	testing::InitGoogleTest(&argc, argv);
+	return RUN_ALL_TESTS();
+	setlocale(LC_ALL, "Rus");									// Функция для работы с русским языком
+
+	Res(5);
+
+	int k, n;
+	int *Array=NULL;
+	cout << "Для ввода новой последовательности нажмите 1\nДля ввода последовательности из файла нажмите 2\n";
+	cin >> k;
+	int p = 1;
+	if (k == p)
+	{
+		ofstream INCLUDE("INPUT.TXT", ios_base::trunc);
+		n = rand() % 40 + 20;
+		INCLUDE << n << endl;
+		cout << "Количество чисел в ряду:\n" << n;
+		Array = new int[n + 2];
+		cout << "\nНачальный ряд чисел:\n";
+		for (int i = 0; i < n; ++i)
+		{
+			Array[i] = rand() % 9 + 1; 
+			cout << Array[i] <<	" ";   
+			INCLUDE << Array[i] << " ";
+		}							   
+	}								   
+									   
+	else if (k == 2)
+	{
+		ifstream INPUT("INPUT.TXT");
+		INPUT >> n;
+		Array = new int[n + 2];
+		for (int i = 0; i < n; i++)
+		INPUT >> Array[i];
+	}
+	else
+	{
+		cout << "Вы ввели неправильное значение\n";
+		system("pause");
+		system("cls");
+    main();
+	}
+
+	Array[n] = Array[n-1];
+	Array[n + 1] = Array[n];
+			 
+	Player A;
+	Player B;
+			 
+	for (int i=n; i > n / 2; i --)
+	{				
+		A.Game(i, n, Array);
+		cout << "\nИгрок 1: " << A.Play << "\n";
+		i--;
+		B.Game(i, n, Array);
+		cout << "\nИгрок 2: " << B.Play << "\n";
+		n--;
+	}
+Result(A.Play, B.Play);
+
+	cout << "\n";
+	system("pause");
+}
